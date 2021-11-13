@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+
+</head>
+
+<body>
+    <fieldset>
+        <legend>Consulta CEP</legend>
+        <input id="iptcep" type="number" placeholder="digite o CEP aqui" /> <b>Somente números</b>
+        <br/>
+        <button onclick="getInfo()">buscar</button>
+
+    </fieldset>
+    <table>
+        <tr>
+            <td>logadouro: </td>
+            <td id="saidalogradouro"></td>
+        </tr>
+        <tr>
+            <td>bairro: </td>
+            <td id="saidabairro"></td>
+        </tr>
+        <tr>
+            <td>localidade: </td>
+            <td id="saidalocal"></td>
+        </tr>
+        <tr>
+            <td>uf: </td>
+            <td id="saidauf"></td>
+        </tr>
+    </table>
+
+    <script>
+        function getInfo() {
+            var cep = $('#iptcep').val();
+            var url = "https://viacep.com.br/ws/" + cep + "/json/";
+            $.get(url, null, function(conteudoLido) {
+                console.log(conteudoLido);
+                $('#saidalogradouro').html(conteudoLido.logradouro);
+                $('#saidabairro').html(conteudoLido.bairro);
+                $('#saidalocal').html(conteudoLido.localidade);
+                $('#saidauf').html(conteudoLido.uf);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
